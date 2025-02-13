@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "FastAPI Scraper API",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

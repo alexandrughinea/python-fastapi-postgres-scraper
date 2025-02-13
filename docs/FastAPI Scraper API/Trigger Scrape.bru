@@ -1,0 +1,25 @@
+meta {
+  name: Trigger Scrape
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8000/scrape/
+  body: json
+  auth: none
+}
+
+headers {
+  X-API-Key: YOUR_API_KEY
+  Content-Type: application/json
+}
+
+body:json {
+  {
+      "urls": [
+          "http://example.com",
+          "http://another-example.com"
+      ]
+  }
+}

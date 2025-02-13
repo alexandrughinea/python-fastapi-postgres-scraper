@@ -1,0 +1,22 @@
+meta {
+  name: Get Scraped Data
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8000/data?search=example&url=example.com&limit=100&offset=0
+  body: none
+  auth: none
+}
+
+params:query {
+  search: example
+  url: example.com
+  limit: 100
+  offset: 0
+}
+
+headers {
+  X-API-Key: key1
+}
