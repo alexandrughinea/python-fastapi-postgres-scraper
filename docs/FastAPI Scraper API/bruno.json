@@ -1,9 +1,173 @@
 {
   "version": "1",
-  "name": "FastAPI Scraper API",
+  "name": "FastAPI PostgreSQL Web Scraper with Vector Similarity Search",
   "type": "collection",
   "ignore": [
     "node_modules",
     ".git"
+  ],
+  "folders": [
+    {
+      "name": "Data Operations",
+      "items": [
+        {
+          "name": "Get Data by ID",
+          "request": {
+            "url": "http://localhost:8000/v1/data/1",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": "your-api-key"
+              }
+            ],
+            "description": "Retrieve a specific scraped content item by ID"
+          }
+        },
+        {
+          "name": "List All Data",
+          "request": {
+            "url": "http://localhost:8000/v1/data/",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": "your-api-key"
+              }
+            ],
+            "params": [
+              {
+                "name": "search",
+                "value": "",
+                "description": "Optional search term in content"
+              },
+              {
+                "name": "url",
+                "value": "",
+                "description": "Optional filter by URL"
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "description": "Max number of results"
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "description": "Results offset"
+              }
+            ],
+            "description": "Get scraped data with optional filtering"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search Operations",
+      "items": [
+        {
+          "name": "Semantic Search",
+          "request": {
+            "url": "http://localhost:8000/v1/search",
+            "method": "GET",
+            "headers": [
+              {
+                "name": "x-api-key",
+                "value": "your-api-key"
+              }
+            ],
+            "params": [
+              {
+                "name": "text",
+                "value": "example search text",
+                "description": "Text to search for similar content"
+              },
+              {
+                "name": "limit",
+                "value": "5",
+                "description": "Number of similar items to return"
+              },
+              {
+                "name": "threshold",
+                "value": "0.7",
+                "description": "Minimum similarity score"
+              }
+            ],
+            "description": "Search for similar content using text input"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Scraping Operations",
+      "items": [
+        {
+          "name": "Scrape URL",
+          "request": {
+            "url": "http://localhost:8000/v1/scrape/",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "x-api-key",
+                "value": "your-api-key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "content": {
+                "urls": [
+                  "https://example.com"
+                ]
+              }
+            },
+            "description": "Trigger scraping of a URL"
+          }
+        },
+        {
+          "name": "Batch Scrape",
+          "request": {
+            "url": "http://localhost:8000/v1/scrape/batch/",
+            "method": "POST",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "name": "x-api-key",
+                "value": "your-api-key"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "content": {
+                "urls": [
+                  "https://example.com",
+                  "https://example.org"
+                ]
+              }
+            },
+            "description": "Batch scrape multiple URLs"
+          }
+        }
+      ]
+    },
+    {
+      "name": "System",
+      "items": [
+        {
+          "name": "Health Check",
+          "request": {
+            "url": "http://localhost:8000/v1/health",
+            "method": "GET",
+            "description": "Check if the API is healthy"
+          }
+        }
+      ]
+    }
   ]
 }

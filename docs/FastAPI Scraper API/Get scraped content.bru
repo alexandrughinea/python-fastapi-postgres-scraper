@@ -1,0 +1,15 @@
+meta {
+  name: Get Content by ID
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://localhost:8000/v1/data/2
+  body: none
+  auth: none
+}
+
+headers {
+  X-API-Key: {{x-api-key}}
+}

@@ -1,11 +1,11 @@
 meta {
-  name: Trigger Scrape
+  name: Batch Scrape
   type: http
-  seq: 4
+  seq: 5
 }
 
 post {
-  url: http://localhost:8000/v1/scrape/
+  url: http://localhost:8000/v1/scrape/batch/
   body: json
   auth: none
 }
@@ -18,7 +18,9 @@ headers {
 body:json {
   {
     "urls": [
-      "https://en.wikipedia.org/wiki/The_Boat_Race_2018"
+      "https://example.com",
+      "https://example.org",
+      "https://example.net"
     ]
   }
 }
