@@ -1,4 +1,6 @@
 # FastAPI imports
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Depends, HTTPException, Query
 from fastapi.responses import JSONResponse
 
@@ -16,7 +18,7 @@ from .embeddings import embedder
 from apscheduler.schedulers.background import BackgroundScheduler
 
 # Standard library
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Optional
 
 # Pydantic
@@ -127,10 +129,24 @@ def trigger_scrape(urls: List[str], db: Session = Depends(get_db)):
         results.append({"url": url, "success": success})
     return results
 
+@app.get("/health")
+async def health_check():
+    return JSONResponse(content={
+        "status": "healthy",
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    })
+
 # Initialize scheduler
 scheduler = BackgroundScheduler()
-scheduler.start()
 
-@app.on_event("startup")
-async def startup_event():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup: Create database tables and start scheduler
     db.Base.metadata.create_all(bind=db.engine)
+    scheduler.start()
+
+    yield  # This marks the running state of the app
+
+    # Shutdown: Stop the scheduler
+    scheduler.shutdown(wait=False)
+
