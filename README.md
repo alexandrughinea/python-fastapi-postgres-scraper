@@ -1,3 +1,5 @@
+[![Python](https://github.com/alexandrughinea/python-fastapi-postgres-scraper/actions/workflows/python-lint.yml/badge.svg)](https://github.com/alexandrughinea/python-fastapi-postgres-scraper/actions/workflows/python-lint.yml)
+
 # FastAPI PostgreSQL Web Scraper with Vector Similarity Search
 
 A powerful web scraping and content similarity search application built with FastAPI, PostgreSQL with pgvector extension, and Playwright.

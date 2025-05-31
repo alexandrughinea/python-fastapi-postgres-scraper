@@ -1,16 +1,17 @@
-from playwright.sync_api import sync_playwright
+import logging
+import urllib.parse
+from typing import List
+
+from bs4 import BeautifulSoup
 from playwright.async_api import async_playwright
+from playwright.sync_api import sync_playwright
+from robotexclusionrulesparser import RobotExclusionRulesParser
 from sqlalchemy import select
 from sqlalchemy.orm import Session
+
+from .config import settings
 from .db import ScrapedData
 from .embeddings import embedder
-from .config import settings
-import logging
-from typing import List
-from bs4 import BeautifulSoup
-import urllib.parse
-from robotexclusionrulesparser import RobotExclusionRulesParser
-
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)

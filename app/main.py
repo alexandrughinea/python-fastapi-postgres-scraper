@@ -1,17 +1,18 @@
-from fastapi import FastAPI, Depends, Query
-from fastapi.responses import JSONResponse
-import numpy as np
-from datetime import datetime, timezone
-from sqlalchemy.orm import Session
-from apscheduler.schedulers.background import BackgroundScheduler
 from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 from typing import List, Optional
-from pydantic import BaseModel
 
-from .db import SessionLocal, ScrapedData, Base
-from .scraper import scrape_url, async_scrape_batch
-from .embeddings import embedder
+import numpy as np
+from apscheduler.schedulers.background import BackgroundScheduler
+from fastapi import Depends, FastAPI, Query
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+from sqlalchemy.orm import Session
+
 from . import auth
+from .db import Base, ScrapedData, SessionLocal
+from .embeddings import embedder
+from .scraper import async_scrape_batch, scrape_url
 
 app = FastAPI()
 
